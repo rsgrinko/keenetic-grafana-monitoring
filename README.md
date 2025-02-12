@@ -79,7 +79,7 @@ version: '3.7'
 services:
 
   keenetic-grafana-monitoring:
-    image: techh/keenetic-grafana-monitoring:2.0.2
+    image: techh/keenetic-grafana-monitoring:2.0.3
     container_name: keenetic-grafana-monitoring
     # environment:
     #  - TZ=Europe/Kiev

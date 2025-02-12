@@ -105,7 +105,7 @@ if __name__ == '__main__':
     config = configparser.ConfigParser(interpolation=None)
     config_path = pwd + "/config/config.ini"
     config.read(config_path)
-    
+
     infuxdb_writer = InfuxWriter(config['influx2'], config_path)
 
     keenetic_config = config['keenetic']
@@ -121,7 +121,11 @@ if __name__ == '__main__':
         wait_interval = config['collector'].getint('interval_sec')
         logging.info(f"Configuration done. Start collecting with interval: {wait_interval} sec")
         while True:
-            for collector in collectors:
-                metrics = collector.collect()
-                infuxdb_writer.write_metrics(metrics)
+            try:
+                for collector in collectors:
+                    metrics = collector.collect()
+                    infuxdb_writer.write_metrics(metrics)
+            except Exception as e:
+                logging.error(f"Collector failed. Reason: {e}")
+
             time.sleep(wait_interval)

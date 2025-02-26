@@ -16,10 +16,10 @@ services:
   # Influx 2.x
 
   influxdb:
-    image: 'influxdb:2.1'
+    image: 'influxdb:2.7.11'
     volumes:
       - ./_data/influxdb:/var/lib/influxdb
-    ports: 
+    ports:
       - 8086:8086
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=setup
